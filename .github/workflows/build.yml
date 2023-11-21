@@ -2,7 +2,7 @@ name: Build
 run-name: ${{ github.actor }} sent a push to GitHub.
 on: [push]
 jobs:
-  Run-Linux-Tests:
+  Run-Build:
     strategy:
       matrix:
         target:
