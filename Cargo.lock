@@ -365,7 +365,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ombt"
+name = "obmt"
 version = "0.1.0"
 dependencies = [
  "openmw-cfg",
