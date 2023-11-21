@@ -124,7 +124,17 @@ fn collect_meshes(log: &mut Vec<u8>) -> Vec<(NiStream, PathBuf)> {
                             if !texture.ends_with("_nm.dds") {
                                 continue;
                             };
-                            let _ = rename(path, path.with_file_name(texture.replace("_nm", "_n")));
+                            if path.to_str().unwrap().contains("materials") {
+                                let texture_path = path.to_str().unwrap();
+                                let new_dir = texture_path.replace("materials", "textures");
+                                let _ = rename(
+                                    path,
+                                    path.with_file_name(new_dir.replace("_normals", "_n")),
+                                );
+                            } else {
+                                let _ =
+                                    rename(path, path.with_file_name(texture.replace("_nm", "_n")));
+                            }
                             let _ = write!(log, "Renamed bumpMap texture: {:?}\n", &path);
                         }
                     }
