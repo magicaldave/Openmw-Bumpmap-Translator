@@ -13,6 +13,9 @@ jobs:
           - nightly
     runs-on: ubuntu-latest
     steps:
+      - name: Install cross-comp dependencies
+        run: |
+          sudo apt update && sudo apt-get -y install gcc-multilib libtinfo5 mingw-w64
       - uses: actions/checkout@v3
       - name: Update Rust Toolchain
         uses: actions-rs/toolchain@v1
