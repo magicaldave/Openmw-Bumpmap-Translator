@@ -33,6 +33,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: Stable-CI
-          files: target/${{ matrix.target }}/release/obmt${{ matrix.target_system == 'x86_64-pc-windows-gnu' && '.exe' || ''}}
+          files: target/${{ matrix.target }}/release/obmt${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || ''}}
           body: |
             Bumpmap translator CI build
