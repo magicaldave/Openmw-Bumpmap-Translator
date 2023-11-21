@@ -55,7 +55,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release --target ${{ matrix.target }} --all-features
+          args: --release --all-features
           toolchain: ${{ matrix.toolchain }}
       - name: Upload Release
         uses: softprops/action-gh-release@v1
