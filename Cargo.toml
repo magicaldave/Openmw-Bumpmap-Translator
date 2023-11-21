@@ -1,0 +1,15 @@
+[package]
+name = "openmw-bumpmap-translator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+openmw-cfg = "0.5.0"
+walkdir = "2"
+
+[dependencies.tes3]
+git = "https://github.com/Greatness7/tes3"
+branch = "dev"
+features = ["esp", "nif", "nightly"]
