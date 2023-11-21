@@ -58,8 +58,6 @@ jobs:
           command: build
           args: --release --all-features
           toolchain: ${{ matrix.toolchain }}
-      - run: |
-          mv /target/aarch64-apple-darwin/release/obmt /target/aarch64-apple-darwin/release/obmt-mac
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
