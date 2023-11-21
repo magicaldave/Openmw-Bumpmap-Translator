@@ -1,0 +1,34 @@
+name: Build
+run-name: ${{ github.actor }} sent a push to GitHub.
+on: [push]
+jobs:
+  Run-Linux-Tests:
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-gnu
+          - x86_64-pc-windows-gnu
+          - aarch64-apple-darwin
+        toolchain:
+          - nightly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update Rust Toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          target: ${{ matrix.target }}
+      - name: Run Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target ${{ matrix.target }} --all-features
+          toolchain: ${{ matrix.toolchain }}
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Stable-CI
+          files: target/${{ matrix.target }}/release/obmt${{ matrix.target_system != 'x86_64-pc-windows-gnu' && '.exe' || ''}}
+          body: |
+            Bumpmap translator CI build
