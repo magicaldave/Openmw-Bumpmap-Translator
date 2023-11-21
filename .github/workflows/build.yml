@@ -63,6 +63,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: Stable-CI
-          files: target/release/obmt
+          files: target/${{ matrix.target}}/release/obmt
           body: |
             Bumpmap translator CI build
