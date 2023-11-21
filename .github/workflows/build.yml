@@ -58,6 +58,8 @@ jobs:
           command: build
           args: --release --all-features
           toolchain: ${{ matrix.toolchain }}
+      - run: |
+          ls -la target/*
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
