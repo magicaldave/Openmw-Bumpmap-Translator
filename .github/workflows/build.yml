@@ -30,6 +30,8 @@ jobs:
           command: build
           args: --release --target ${{ matrix.target }} --all-features
           toolchain: ${{ matrix.toolchain }}
+      - run: |
+          ls -la1R
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
