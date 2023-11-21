@@ -2,7 +2,7 @@ name: Build
 run-name: ${{ github.actor }} sent a push to GitHub.
 on: [push]
 jobs:
-  Run-Build:
+  Run-Cross-Build:
     strategy:
       matrix:
         target:
@@ -35,5 +35,32 @@ jobs:
         with:
           tag_name: Stable-CI
           files: target/${{ env.BUILD_DIR }}release/obmt${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || ''}}
+          body: |
+            Bumpmap translator CI build
+
+  Run-Mac-Build:
+    strategy:
+      matrix:
+        toolchain:
+          - nightly
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update Rust Toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          target: ${{ matrix.target }}
+      - name: Run Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target ${{ matrix.target }} --all-features
+          toolchain: ${{ matrix.toolchain }}
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Stable-CI
+          files: target/release/obmt
           body: |
             Bumpmap translator CI build
