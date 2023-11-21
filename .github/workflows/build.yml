@@ -16,7 +16,7 @@ jobs:
       BUILD_DIR: ${{ matrix.target != 'x86_64-pc-unknown-linux-gnu' && matrix.target && '/' || '' }}
     steps:
       - name: Install cross-comp dependencies
-        if: ${{ matrix.target }} == 'x86_64-pc-windows-gnu'
+        if: ${{ matrix.target == 'x86_64-pc-windows-gnu' }}
         run: |
           sudo apt update && sudo apt-get -y install gcc-multilib libtinfo5 mingw-w64
       - uses: actions/checkout@v3
