@@ -1,6 +1,8 @@
 name: Build
 run-name: ${{ github.actor }} sent a push to GitHub.
 on: [push]
+permissions:
+  contents: write
 jobs:
   Run-Cross-Build:
     strategy:
