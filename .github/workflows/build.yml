@@ -59,11 +59,11 @@ jobs:
           args: --release --all-features
           toolchain: ${{ matrix.toolchain }}
       - run: |
-          ls -la target/*
+          mv target/release/obmt target/release/obmt-mac
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: Stable-CI
-          files: target/aarch64-apple-darwin/release/obmt-mac
+          files: target/release/obmt-mac
           body: |
             Bumpmap translator CI build
