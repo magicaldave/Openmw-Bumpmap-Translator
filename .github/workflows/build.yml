@@ -13,7 +13,7 @@ jobs:
           - nightly
     runs-on: ubuntu-latest
     env:
-      BUILD_DIR: ${{ matrix.target != 'x86_64-pc-unknown-linux-gnu' && matrix.target && '/' || '' }}
+      BUILD_DIR: ${{ matrix.target != 'x86_64-pc-unknown-linux-gnu' && matrix.target || '' }}${{ matrix.target != 'x86_64-pc-unknown-linux-gnu' && '/' || '' }}
     steps:
       - name: Install cross-comp dependencies
         if: ${{ matrix.target == 'x86_64-pc-windows-gnu' }}
